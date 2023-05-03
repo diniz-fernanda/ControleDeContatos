@@ -10,6 +10,11 @@ namespace ControleDeContatos.Repository
         {
             _bancoContext= bancoContext;
         }
+        public List<ContatoModel> BuscarTodos()
+        {
+            return _bancoContext.Contatos.ToList();
+        }
+
         public ContatoModel Adicionar(ContatoModel contato)
         {
             //Gravar no bando de dados
@@ -17,5 +22,6 @@ namespace ControleDeContatos.Repository
             _bancoContext.SaveChanges();
             return contato;
         }
+
     }
 }

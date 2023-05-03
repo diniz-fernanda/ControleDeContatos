@@ -13,7 +13,8 @@ namespace ControleDeContatos.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            List<ContatoModel> contatos = _contatoRepository.BuscarTodos();
+            return View(contatos);
         }
         public IActionResult Criar()
         {
@@ -23,6 +24,7 @@ namespace ControleDeContatos.Controllers
         public IActionResult Criar(ContatoModel contato)
         {
             _contatoRepository.Adicionar(contato);
+           // await _contatoRepository.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         public IActionResult Editar()
