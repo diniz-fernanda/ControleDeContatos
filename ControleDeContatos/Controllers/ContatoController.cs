@@ -16,24 +16,34 @@ namespace ControleDeContatos.Controllers
             List<ContatoModel> contatos = _contatoRepository.BuscarTodos();
             return View(contatos);
         }
-        public IActionResult Criar()
-        {
-            return View();
-        }
+
         [HttpPost]
         public IActionResult Criar(ContatoModel contato)
         {
             _contatoRepository.Adicionar(contato);
-           // await _contatoRepository.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            ContatoModel contato = _contatoRepository.ListarPorId(id);
+            return View(contato);
         }
-        public IActionResult Excluir()
+        [HttpPost]
+        public IActionResult Alterar(ContatoModel contato)
         {
-            return View();
+            _contatoRepository.Atualizar(contato);
+            return RedirectToAction("Index");
+        }
+        public IActionResult ApagarConfirmacao(int id)
+        {
+            ContatoModel contato = _contatoRepository.ListarPorId(id);
+            return View(contato);
+        }
+
+        public IActionResult Apagar(int id)
+        {
+            _contatoRepository.Apagar(id);
+            return RedirectToAction("Index");
         }
 
     }
