@@ -3,10 +3,11 @@
 
 // Write your JavaScript code.
 
-let table = new DataTable('#myTable');
 
-$(document).ready(function () {
-    $('#table-contatos').DataTable({
+
+
+function getDataTable(id) {
+    $(id).DataTable({
         "ordering": true,
         "paging": true,
         "searching": true,
@@ -34,8 +35,26 @@ $(document).ready(function () {
             }
         }
     });
+}
 
-});
+$(document).ready(function () {
+    getDataTable("#table-contatos");
+    getDataTable("#table-usuarios");
+
+    $('.btn-total-contatos').click(function () {
+        var usuarioId = $(this).attr('usuario-id');
+        $('#modalContatosUsuario').modal();
+        $.ajax({
+            type: 'GET',
+            url: '/Usuario/ListarContatosPorUsuarioId/' + usuarioId,
+            success: function (result) {
+                $("#listaContatosUsuario").html(result);
+                getDatatable('#table-contatos-usuario');
+            }
+        });
+
+    });
+})
 $('.close-alert').click(function () {
     $('.alert').hide('hide');
 })
