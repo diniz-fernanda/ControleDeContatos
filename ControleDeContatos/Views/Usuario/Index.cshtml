@@ -20,7 +20,7 @@
     {
         <div class="alert alert-danger" role="alert">
             <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">X</button>
-            @TempData["MensagemSucesso"]
+            @TempData["MensagemErro"]
         </div>
     }
 
@@ -35,6 +35,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Login</th>
                 <th scope="col">E-mail</th>
+                <th scope="col">Perfil</th>
                 <th scope="col">Data de cadastro</th>
 
                 <th scope="col"></th>
@@ -50,12 +51,13 @@
                         <td>@usuario.Nome</td>
                         <td>@usuario.Login</td>
                         <td>@usuario.Email</td>
+                        <td>@(usuario.Perfil == ControleDeContatos.Models.Enums.PerfilEnum.Administrador ? "Administrador" : "Padrão")</td>
                         <td>@usuario.DataCadastro</td>
 
                         <td>
                             <div class="btn-group" role="group">
-                                <a role="button" class="btn btn-primary" asp-route-id="@usuario.Id" asp-controller="Contato" asp-action="Editar">Editar</a>
-                                <a role="button" class="btn btn-danger" asp-route-id="@usuario.Id" asp-controller="Contato" asp-action="ApagarConfirmacao">Apagar</a>
+                                <a role="button" class="btn btn-primary" asp-route-id="@usuario.Id" asp-controller="Usuario" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@usuario.Id" asp-controller="Usuario" asp-action="ApagarConfirmacao">Apagar</a>
                             </div>
                         </td>
                     </tr>
